@@ -1,0 +1,32 @@
+apply plugin: "groovy"
+apply plugin: "application"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = 0.1
+
+sourceSets {
+     main {
+          groovy {
+               srcDirs = ["src"]
+          }
+          resources {
+               srcDir "res"
+          }
+     }
+}
+
+dependencies {
+    runtime LIB("both") + LIB("runtime")
+    compile LIB("both") + LIB("compile")
+}
+
+compileGroovy.groovyClasspath = configurations.compile
+
+mainClassName = "bg.projectoria.jmssh.Main"
+
+def LIB(String dir) {
+    return fileTree(dir: "libs/$dir", include: "*.jar")
+}
