@@ -3,13 +3,19 @@ package bg.projectoria.jmssh
 import org.codehaus.groovy.tools.shell.Groovysh
 import org.codehaus.groovy.tools.shell.IO
 
-class JMSSh extends Groovysh {
+class JMSSh  {
+
+    private final Groovysh sh;
 
     JMSSh(IO io) {
-        super(io);
+        sh = new Groovysh(io);
     }
 
     JMSSh() {
-        super();
+        sh = new Groovysh();
+    }
+
+    int run(final String[] args) {
+        sh.run(args);
     }
 }

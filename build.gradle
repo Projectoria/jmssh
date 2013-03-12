@@ -27,6 +27,8 @@ compileGroovy.groovyClasspath = configurations.compile
 
 mainClassName = "bg.projectoria.jmssh.Main"
 
+run.standardInput = System.in
+
 def LIB(String dir) {
     return fileTree(dir: "libs/$dir", include: "*.jar")
 }
