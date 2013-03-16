@@ -7,19 +7,22 @@ import org.codehaus.groovy.tools.shell.IO
 class JMSSh  {
 
     private final Groovysh sh;
+    private final Environment env;
 
     JMSSh(IO io) {
         sh = new Groovysh(io);
-        initEnv();
+        env = new Environment();
+        init();
     }
 
     JMSSh() {
         sh = new Groovysh();
-        initEnv();
+        env = new Environment();
+        init();
     }
 
-    private void initEnv() {
-        sh.register new LsCommand(sh)
+    private void init() {
+        sh.register new LsCommand(sh, env)
     }
 
     int run(final String[] args) {
