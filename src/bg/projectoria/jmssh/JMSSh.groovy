@@ -1,6 +1,7 @@
 package bg.projectoria.jmssh
 
-import bg.projectoria.jmssh.commands.LsCommand
+import bg.projectoria.jmssh.commands.Builtin
+import bg.projectoria.jmssh.commands.LsBuiltin
 import org.codehaus.groovy.tools.shell.Groovysh
 import org.codehaus.groovy.tools.shell.IO
 
@@ -22,7 +23,7 @@ class JMSSh  {
     }
 
     private void init() {
-        sh.register new LsCommand(sh, env)
+        Builtin.loadBuiltins(sh, env)
     }
 
     int run(final String[] args) {
