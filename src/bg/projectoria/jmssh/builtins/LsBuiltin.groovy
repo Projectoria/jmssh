@@ -1,4 +1,4 @@
-package bg.projectoria.jmssh.commands
+package bg.projectoria.jmssh.builtins
 
 import bg.projectoria.jmssh.Environment
 import org.codehaus.groovy.tools.shell.Shell

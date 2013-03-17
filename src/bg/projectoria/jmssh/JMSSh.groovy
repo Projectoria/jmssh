@@ -1,7 +1,6 @@
 package bg.projectoria.jmssh
 
-import bg.projectoria.jmssh.commands.Builtin
-import bg.projectoria.jmssh.commands.LsBuiltin
+import bg.projectoria.jmssh.builtins.Builtin
 import org.codehaus.groovy.tools.shell.Groovysh
 import org.codehaus.groovy.tools.shell.IO
 
