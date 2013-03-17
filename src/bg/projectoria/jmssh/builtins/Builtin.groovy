@@ -19,12 +19,16 @@ abstract class Builtin extends CommandSupport {
 
     @Override
     Object execute(List list) {
-        shell.io.println toString(call(list.toArray()))
+        String output = toString(call(list.toArray()))
+        if (output != null)
+            shell.io.println(output)
     }
 
     private static String toString(Object obj) {
         if (isSequence(obj))
             obj.collect() { e -> toString(e) }.join("\n")
+        else if (obj == null)
+            null
         else
             String.valueOf(obj)
     }
