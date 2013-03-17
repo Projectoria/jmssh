@@ -1,5 +1,7 @@
 package bg.projectoria.jmssh
 
+import java.nio.file.FileAlreadyExistsException
+
 class Environment {
 
     private final Directory root
@@ -18,6 +20,17 @@ class Environment {
 
     void chdir(String dir) {
         // FIXME
+    }
+
+    void mkdir(String dir) {
+        Directory parent = resolve(dirname(dir))
+        def name = basename(dir)
+        if (parent.containsKey(name))
+            throw new FileAlreadyExistsException(dir)
+
+        Directory child = new Directory()
+        child.put("..", parent)
+        parent.put(name, child)
     }
 
     Object resolve(String path) {
@@ -55,6 +68,28 @@ class Environment {
 
     private static resolveError(String path) {
         throw new FileNotFoundException("No such context: $path")
+    }
+
+
+    static String basename(String name) {
+        splitname(name).last()
+    }
+
+    static String dirname(String name) {
+        splitname(name).first()
+    }
+
+    private static List<String> splitname(String name) {
+        def sep = name.lastIndexOf("/")
+        if (sep == -1)
+            // No separator at all ("ala")
+            return [".", name]
+        else if (sep == 0)
+            // Separator only at the beginning ("/ala")
+            return ["/", name[1..-1]]
+        else
+            // Separator somewhere in the middle ("/ala/bala" or "ala/bala")
+            return [name[0..(sep - 1)], name[(sep + 1)..-1]]
     }
 }
 

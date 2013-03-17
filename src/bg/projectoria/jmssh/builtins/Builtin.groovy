@@ -34,10 +34,10 @@ abstract class Builtin extends CommandSupport {
     }
 
     static List<Builtin> loadBuiltins(Shell shell, Environment env) {
-        def result = []
-        result.add(new LsBuiltin(shell, env))
-
-        result
+        [
+                new LsBuiltin(shell, env),
+                new MkdirBuiltin(shell, env)
+        ]
     }
 
 }
